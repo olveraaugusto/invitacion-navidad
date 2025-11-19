@@ -27,17 +27,80 @@
         
         /* Fondo azul completo en toda la pantalla */
         body {
-            background: #1e293b !important; /* slate-900 */
+            background: #1e293b !important;
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Contenedor de copos de nieve */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Copos de nieve grandes y visibles */
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: snowFall linear infinite;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            opacity: 0.9;
+        }
+
+        /* Animación de caída de nieve con movimiento lateral */
+        @keyframes snowFall {
+            0% {
+                transform: translateY(-100px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Estrella blanca tipo pico de árbol de navidad */
+        .tree-topper {
+            animation: gentleFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.05);
+            }
+        }
+
+        /* Efecto de brillo suave para la estrella */
+        .star-glow {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
         }
     </style>
 </head>
 <body class="font-sans flex items-center justify-center min-h-screen p-4">
 
+    <!-- Contenedor de copos de nieve -->
+    <div class="snow-container" id="snowContainer"></div>
+
     <!-- CONTENEDOR PRINCIPAL CON DOBLE MARCO BLANCO -->
-    <div class="w-full max-w-md mx-auto aspect-[4/5] relative flex flex-col items-center p-6 py-8 text-center text-white">
+    <div class="w-full max-w-md mx-auto aspect-[4/5] relative flex flex-col items-center p-6 py-8 text-center text-white" style="z-index: 10;">
         
         <!-- MARCO EXTERNO BLANCO -->
         <div class="absolute inset-0 border-4 border-white/30 rounded-xl pointer-events-none"></div>
@@ -50,8 +113,16 @@
         
         <!-- Encabezado -->
         <div class="flex flex-col items-center mt-2 relative z-10">
-            <!-- Icono Sparkles -->
-            <i data-lucide="sparkles" class="w-7 h-7 mb-3 text-slate-200"></i>
+            <!-- Estrella blanca tipo pico de árbol de navidad -->
+            <div class="tree-topper star-glow mb-3">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <!-- Estrella elegante tipo pico de árbol -->
+                    <path d="M12 1L14 8H21L15.5 12L17 19L12 15L7 19L8.5 12L3 8H10L12 1Z" 
+                          fill="white" stroke="white" stroke-width="0.5"/>
+                    <!-- Punto central para más definición -->
+                    <circle cx="12" cy="12" r="1" fill="white"/>
+                </svg>
+            </div>
             <p class="text-xs uppercase tracking-[0.25em] mb-3 text-slate-200 font-montserrat">
                 Navidad Expert Cell 2025
             </p>
@@ -88,7 +159,7 @@
                     <span class="text-xs md:text-sm opacity-80 max-w-[240px] md:max-w-[280px] leading-tight mt-1">
                         Av. del sol, Reserva Territorial Atlixcayotl, Centro Comercial Puebla.
                     </span>
-                    <!-- NUEVO: Enlace de ubicación -->
+                    <!-- Enlace de ubicación -->
                     <a href="https://maps.app.goo.gl/8t9AEvosfGn6z3aZ6" target="_blank" class="flex items-center justify-center gap-1 mt-2 text-cyan-300 hover:text-cyan-200 transition-colors text-xs font-medium">
                         <i data-lucide="navigation" class="w-3 h-3"></i>
                         Ubicación
@@ -123,6 +194,44 @@
             const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
             window.open(urlWhatsApp, '_blank');
         }
+
+        // Crear copos de nieve grandes y visibles
+        function createSnowflakes() {
+            const snowContainer = document.getElementById('snowContainer');
+            const snowflakeCount = 36; // DUPLICADO: de 18 a 36 copos
+
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                
+                // Tamaños más variados para mejor efecto visual
+                const size = Math.random() * 15 + 6; // Más grandes: entre 6px y 21px
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // Posición horizontal aleatoria
+                snowflake.style.left = `${Math.random() * 100}%`;
+                
+                // Duración de caída más variada para efecto más natural
+                const duration = Math.random() * 10 + 5; // Entre 5s y 15s
+                snowflake.style.animationDuration = `${duration}s`;
+                
+                // Delay aleatorio para que no caigan todos a la vez
+                snowflake.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Añadir más brillo a algunos copos
+                if (Math.random() > 0.7) {
+                    snowflake.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.9)';
+                }
+                
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Inicializar animaciones cuando la página cargue
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnowflakes();
+        });
     </script>
 </body>
 </html>
