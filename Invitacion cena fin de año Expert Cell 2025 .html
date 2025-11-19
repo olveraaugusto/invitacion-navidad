@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Cena de Navidad</title>
+    
+    <!-- META TAGS PARA WHATSAPP PREVIEW -->
+    <meta property="og:title" content="Invitación Cena de Navidad">
+    <meta property="og:description" content="Tenemos el honor de invitarle a celebrar los logros de este año en una velada de elegancia.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80">
+    <meta property="og:url" content="https://tudominio.com/invitacion-navidad">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para los íconos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Fuentes de Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        
+        /* Mejoras responsive adicionales */
+        @media (max-width: 480px) {
+            .invitation-container {
+                min-height: 100vh;
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .text-responsive {
+                font-size: 0.9rem;
+            }
+            .title-responsive {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans flex items-center justify-center min-h-screen p-2 md:p-8">
+
+    <!-- CONTENEDOR PRINCIPAL MEJORADO PARA RESPONSIVE -->
+    <div class="w-full max-w-lg aspect-[4/5] md:aspect-[3/4] relative shadow-2xl overflow-hidden flex flex-col items-center justify-between p-4 md:p-8 py-6 md:py-10 text-center bg-slate-900 text-white invitation-container rounded-lg md:rounded-xl">
+        
+        <!-- Bordes y Texturas de fondo -->
+        <div class="absolute inset-2 md:inset-3 border-2 border-white/20 opacity-50 pointer-events-none rounded-lg"></div>
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/stardust.png');"></div>
+        
+        <!-- Encabezado -->
+        <div class="flex flex-col items-center mt-1 md:mt-2 relative z-10">
+            <!-- Icono Sparkles -->
+            <i data-lucide="sparkles" class="w-6 h-6 md:w-7 md:h-7 mb-2 md:mb-3 text-slate-200"></i>
+            <p class="text-xs uppercase tracking-[0.25em] mb-2 md:mb-3 text-slate-200 font-montserrat">
+                Invitación Corporativa
+            </p>
+            
+            <!-- Título responsive -->
+            <h2 class="font-playfair text-3xl md:text-4xl lg:text-5xl italic mb-1 md:mb-2 leading-tight title-responsive">
+                Cena de <br/>Navidad
+            </h2>
+            
+            <div class="w-12 md:w-16 h-0.5 my-3 md:my-4 text-slate-200 bg-current opacity-50"></div>
+        </div>
+        
+        <!-- Cuerpo del texto -->
+        <div class="flex flex-col items-center justify-center flex-grow relative z-10 px-2 md:px-4">
+            <!-- Texto responsive -->
+            <p class="font-montserrat text-sm md:text-base mb-4 md:mb-6 leading-relaxed max-w-[280px] md:max-w-[320px] mx-auto opacity-90 text-responsive">
+                Tenemos el honor de invitarle a celebrar los logros de este año en una velada de elegancia.
+            </p>
+            
+            <!-- Detalles del evento - responsive -->
+            <div class="space-y-2 md:space-y-3 font-montserrat text-xs md:text-sm mt-2 md:mt-4">
+                <div class="flex items-center justify-center gap-2">
+                    <i data-lucide="calendar" class="w-3 h-3 md:w-4 md:h-4"></i>
+                    <span>25 de Noviembre</span>
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                    <i data-lucide="clock" class="w-3 h-3 md:w-4 md:h-4"></i>
+                    <span>20:00 Horas</span>
+                </div>
+                <div class="flex flex-col items-center text-center mt-2 md:mt-3">
+                    <div class="flex items-center justify-center gap-2">
+                        <i data-lucide="map-pin" class="w-3 h-3 md:w-4 md:h-4 mt-0.5 shrink-0"></i>
+                        <span class="font-semibold text-sm md:text-base">Salón Fiestopolis</span>
+                    </div>
+                    <span class="text-[9px] md:text-[10px] opacity-80 max-w-[200px] md:max-w-[220px] leading-tight mt-1">
+                        Av. del sol, Reserva Territorial Atlixcayotl, Centro Comercial Puebla.
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón Funcional -->
+        <button 
+            onclick="handleRSVP()"
+            class="mt-6 md:mt-8 px-5 md:px-6 py-2 md:py-2.5 text-xs uppercase tracking-widest font-bold transition-colors bg-white text-slate-900 hover:bg-slate-200 relative z-10 cursor-pointer rounded-sm"
+        >
+            Confirmar Asistencia
+        </button>
+        
+        <div class="absolute bottom-2 md:bottom-4 text-[8px] md:text-[9px] opacity-40 uppercase tracking-widest">
+            <!-- Texto opcional del pie -->
+        </div>
+    </div>
+
+    <!-- Script para funcionalidad -->
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Función para WhatsApp
+        function handleRSVP() {
+            // --- CONFIGURACIÓN ---
+            
+            // 1. TU NÚMERO (Ejemplo México: 525512345678)
+            const numeroTelefono = '522227054476'; 
+            
+            // 2. TU MENSAJE
+            const mensaje = "Hola, quiero confirmar mi asistencia a la Cena de Navidad.\n\n*Detalles:*\n📅 25 de Noviembre\n🕗 20:00 Horas\n📍 Salón Fiestopolis";
+            
+            // Generar enlace y abrir
+            const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>
